@@ -1,38 +1,105 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🍳Sunny-Side-Up Sign-Up</title>
+</head>
 
-{% block title %}
-    회원가입
-{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="wrap">
-            <h2 class="title-center"> 회원가입 </h2>
-            <form class="form-area" method="post" action="/sign-up/">
-                {% csrf_token %}
-                <div class="form-group mt-2 mb-2">
-                    <label for="username">이름</label>
-                    <input type="text" class="form-control" id="username" name="username">
-                </div>
-                <div class="form-group mt-2 mb-2">
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <div class="form-group mt-2 mb-2">
-                    <label for="password2">비밀번호 확인</label>
-                    <input type="password" class="form-control" id="password2" name="password2">
-                </div>
-                {% if error %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </div>
-                {% endif %}
-                <hr>
-                <div style="float: right">
-                    <button type="submit" class="btn btn-primary">회원가입</button>
-                    <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a>
-                </div>
-            </form>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
-        </div>
+
+<style>
+
+    . * {
+        background-color: lightgray;
+    }
+
+    .wrap-top {
+        background-color: white;
+        margin: 100px auto 30px auto;
+        border-color: gray;
+        border-style: solid;
+        border-width: 0.5px;
+        padding: 50px;
+        width: 400px;
+        height: 500px;
+    }
+
+    .wrap-bottom {
+        background-color: white;
+        margin: auto;
+        border-color: gray;
+        border-style: solid;
+        border-width: 0.5px;
+        padding: 20px;
+        width: 400px;
+        height: 65px;
+        text-align: center;
+    }
+
+
+    .headlight {
+        font-size: 40px;
+        margin: auto;
+        padding-bottom: 50px;
+        font-family: 'Lobster', cursive;
+        position: center;
+        text-align: center;
+    }
+
+    .mybtn {
+        width: 300px;
+        margin: 15px auto 0px auto;
+        background-color: cornflowerblue;
+    }
+
+    .sign-up-btn-color {
+        color: cornflowerblue;
+        font-weight: bold;
+    }
+
+    .my-input {
+        margin-bottom: 10px;
+    }
+
+
+    .footer {
+        justify-content: center;
+        display: block;
+        border-bottom: 0;
+        margin: auto;
+    }
+
+
+
+
+</style>
+
+<body>
+
+<div class="wrap-top">
+
+    <h1 class="headlight"> 🍳Sunny-Side-Up </h1>
+    <p> 친구들의 소식이 궁금하시다면 가입하세요! </p>
+
+    <div class="mb-3">
+        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="이메일 주소">
+        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="성명">
+        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="사용자 이름">
+        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="비밀번호">
+        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="비밀번호 확인">
+        <button type="button" class="mybtn btn btn-primary">가입</button>
     </div>
-{% endblock %}
+
+</div>
+
+<div class="wrap-bottom">
+    <h8> 계정이 있으신가요? <a class="sign-up-btn-color" href="...">로그인</a></h8>
+</div>
+
+</body>
+</html>
