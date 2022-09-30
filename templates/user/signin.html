@@ -1,34 +1,87 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🍳Welcome to Sunny-Side-Up</title>
+</head>
 
-{% block title %}
-    로그인
-{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="wrap">
-            <h2 class="title-center"> 로그인</h2>
-            <form class="form-area" method = 'post' action = '/sign-in/'>
-                {% csrf_token %}
-                <div class="form-group mt-2 mb-2">
-                    <label for="username">이름</label>
-                    <input type="text" class="form-control" id="username" name="username">
-                </div>
-                <div class="form-group mt-2 mb-2">
-                    <label for="password">비밀번호</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-                <hr>
-                {% if error %}
-                    <div class = 'alert alert-danger' role = 'alert'>
-                        {{ error }}
-                    </div>
-                {% endif %}
-                <div style="float: right">
-                    <button type="submit" class="btn btn-primary">로그인</button>
-                    <a href="/sign-up" class="btn btn-secondary">회원가입 페이지로</a>
-                </div>
-            </form>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 
-        </div>
+
+<style>
+
+    .* {
+        background-color: lightgray;
+    }
+
+    .wrap-top {
+        background-color: white;
+        margin: 100px auto 30px auto;
+        border-color: gray;
+        border-style: solid;
+        border-width: 0.5px;
+        padding: 50px;
+        width: 400px;
+        height: 380px;
+    }
+
+    .wrap-bottom {
+        background-color: white;
+        margin: auto;
+        border-color: gray;
+        border-style: solid;
+        border-width: 0.5px;
+        padding: 20px;
+        width: 400px;
+        height: 70px;
+        text-align: center;
+    }
+
+    .headlight {
+        font-size: 40px;
+        margin: auto;
+        padding-bottom: 50px;
+        font-family: 'Lobster', cursive;
+        position: center;
+        text-align: center;
+    }
+
+    .mybtn {
+        width: 300px;
+        margin: 15px auto 0px auto;
+        background-color: cornflowerblue;
+    }
+
+    .sign-up-btn-color {
+        color: cornflowerblue;
+        font-weight: bold;
+    }
+
+</style>
+
+<body>
+
+<div class="wrap-top">
+
+    <h1 class="headlight"> 🍳Sunny-Side-Up </h1>
+
+    <div class="mb-3">
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="사용자 이름">
+        <p></p>
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="비밀번호">
     </div>
-{% endblock %}
+
+    <button type="button" class="mybtn btn btn-primary">로그인</button>
+
+</div>
+
+<div class="wrap-bottom">
+    <h8> 아직 계정이 없으신가요? <a class="sign-up-btn-color" href="...">가입하기</a></h8>
+</div>
+
+</body>
+</html>
