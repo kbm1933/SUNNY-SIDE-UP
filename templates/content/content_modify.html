@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    게시글 자세히보기
+{% endblock %}
+
+{% block content %}
+    <div class="container timeline-container">
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <p>
+                                <form action="/content/" method="post">
+
+                                    {% csrf_token %}
+                                    {% if error %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-group mb-2">
+                                        <textarea class="form-control" style="resize: none" name='my-content-title'
+                                                  id="my-content-title"></textarea>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <textarea class="form-control" style="resize: none" name='my-content'
+                                                  id="my-content"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="float:right;">작성하기</button>
+                                </form>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
