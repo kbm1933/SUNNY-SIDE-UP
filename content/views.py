@@ -82,5 +82,22 @@ def delete_comment(request,id):
     comment.delete()
     return redirect('/content/'+str(current_content))
 
-def push_test():
-    pass
+@login_required
+def modify_content(request,id):
+    my_content = ContentModel.objects.get(id=id)
+    content_modify = ContentModel.objects.filter(contents=id).order_by('-created_at')
+    return render(request, 'content/content_modify.html', {'content': my_content, 'modify': content_modify})
+
+@login_required
+def modify_write_content(request, id):
+    if request.method == 'POST':
+        user = request.user
+        contents = request.POST.get('my-content', '')
+        content_title = request.POST.get('my-content-title', '')
+    if contents == '' and content_title == '':
+        all_content = ContentModel.objects.all().order_by('-created_at')
+        return render(request, 'content/home.html', {'error': '글은 공백일 수 없습니다.', 'content': all_content})
+    else:
+        my_content = ContentModel.objects.create(author=user, contents=contents, content_title=content_title)
+        my_content.save()
+        return redirect('/content')

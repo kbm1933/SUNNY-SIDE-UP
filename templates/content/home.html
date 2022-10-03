@@ -23,15 +23,20 @@
                             <div class="card-body">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h5 class="mt-0">나의 이야기를 적어주세요</h5>
+{#                                        <h5 class="mt-0">나의 이야기를 적어주세요</h5>#}
+
                                         <p>
                                         <form action="/content/" method="post">
+
                                             {% csrf_token %}
                                             {% if error %}
                                                 <div class="alert alert-danger" role="alert">
                                                     {{ error }}
                                                 </div>
                                             {% endif %}
+                                         <div class="form-group mb-2">
+                                                <textarea class="form-control" style="resize: none" name='my-content-title' id="my-content-title"></textarea>
+                                        </div>
                                             <div class="form-group mb-2">
                                                 <textarea class="form-control" style="resize: none" name='my-content' id="my-content"></textarea>
                                             </div>
@@ -63,8 +68,14 @@
                                         <span class="badge rounded-pill bg-success">보기</span>
                                     </a>
                                 </div>
+                                <div style="text-align: right">
+                                    <a href="/content/modify/{{ con.id }}">
+                                        <span class="badge rounded-pill bg-success">수정</span>
+                                    </a>
+                                </div>
                                 <div class="media">
                                     <div class="media-body">
+                                        <h5 class="mt-0">{{ con.content_title }}</h5>
                                         <h5 class="mt-0">{{ con.contents }}</h5>
                                     </div>
                                     <div style="text-align: right">

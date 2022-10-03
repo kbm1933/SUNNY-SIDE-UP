@@ -22,3 +22,13 @@ class ContentComment(models.Model):
     comment = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class ContentModify(models.Model):
+    class Meta:
+        db_table = 'modify'
+
+    author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    contents = models.CharField(max_length=256)
+    content_title = models.CharField(max_length=256, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
