@@ -108,3 +108,39 @@ def modify_write_content(request, id):
         my_content.save()
         return redirect('/content')
 
+# 좋아요버튼-메인페이지
+@login_required
+def likes(request, id):
+    me = request.user
+    click_content = ContentModel.objects.get(id=id)
+    if me in click_content.liked.all():
+        click_content.liked.remove(me)
+    else:
+        click_content.liked.add(me)
+    return redirect('/')
+
+# 좋아요버튼 - 디테일페이지
+@login_required
+def likes_detail(request, id):
+    me = request.user
+    click_content = ContentModel.objects.get(id=id)
+    if me in click_content.liked.all():
+        click_content.liked.remove(me)
+    else:
+        click_content.liked.add(me)
+    return redirect('/content/'+str(id))
+
+@login_required
+def like_content(request):
+    if request.method == 'GET':  # 요청하는 방식이 GET 방식인지 확인하기
+        user = request.user.is_authenticated
+        if user:
+            user_list = UserModel.objects.all().exclude(username = request.user.username)
+            all_content = ContentModel.objects.all().order_by('-created_at')
+            context = {
+                'content':all_content,
+                'user_list':user_list,
+            }
+            return render(request,'content/like_content.html',context)
+        else:
+            return redirect('/sign-in')
