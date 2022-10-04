@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib import auth
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+
 
 
 def sign_up_view(request):
@@ -55,3 +57,27 @@ def sign_in_view(request):
         else:
             msg = {'error' : '유저이름 혹은 패스워드를 확인 해 주세요'}
             return render(request,'user/signin.html', msg)
+
+@login_required
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
+
+@login_required
+def user_follow(request, id):
+    me = request.user
+    click_user = UserModel.objects.get(id=id)
+    if me in click_user.followee.all():
+        click_user.followee.remove(request.user)
+    else:
+        click_user.followee.add(request.user)
+    return redirect('/')
+
+@login_required
+def my_view(request):
+    user_list = UserModel.objects.all().exclude(username = request.user.username)
+    context = {
+            'user_list':user_list
+        }
+    return render(request,'user/profile.html',  context)
