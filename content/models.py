@@ -1,4 +1,4 @@
-#content.py models
+#content.py modelsdd
 from django.db import models
 from user.models import UserModel
 from django.conf import settings
@@ -16,7 +16,7 @@ class ContentModel(models.Model):
 
 class ContentComment(models.Model):
     class Meta:
-        db_table = "comment"
+        db_table = 'comment'
 
     contents = models.ForeignKey(ContentModel, on_delete=models.CASCADE)
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
@@ -24,13 +24,11 @@ class ContentComment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
 class ContentModify(models.Model):
     class Meta:
         db_table = 'modify'
 
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-    contents = models.CharField(max_length=256)
-    content_title = models.CharField(max_length=256, null=True)
+    contents = models.CharField(max_length=256,null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

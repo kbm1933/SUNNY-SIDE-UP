@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{#home#}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -211,12 +212,12 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light"
     style = "width: 100%; height:50px; position: fixed;">
 <div class="container">
-  
 
    <a class="headlight" href="/">🍳Sunny-Side-Up</a>
     <input style = "width : 200px " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <div>           
-        <a href="/logout">LOGOUT</a> 
+    <div>
+        <a href="/logout">LOGOUT</a>
+
         <a href="/"><span class="material-symbols-outlined"> home</span></a>
          <span class="material-symbols-outlined"> add_box</span>
         <a href="/tweet/like-tweet"> <span class="material-symbols-outlined">favorite</span></a>
@@ -228,8 +229,10 @@
 
 <div class="main_body">
     <div class="left_body">
-        
+    
+
         <div class="border feed_box">
+
             <div class="feed_name">
                 <div class="profile_box">
                     <img class="profile_img"
@@ -238,7 +241,7 @@
                 <form action="/content/" method="post">
                     {% csrf_token %}
                 <span class="feed_name_txt"> {{ user }} </span>
-            </div>
+
 
             <div class="mb-3">
             <label for="my-content" class="form-label">CONTENT</label>
@@ -247,7 +250,9 @@
 
             <hr>
             <button type="submit" class="btn btn-outline-info">게시</button>
+
         </form>
+            </div>
         </div>
 
         {% for con in content  %}
@@ -264,7 +269,7 @@
                  src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
 
             <div class="feed_icon">
-                <div> 
+                <div>
                     {% comment %} 좋아요 눌려있으면 {% endcomment %}
                     {% if con in user.likes.all %}
                     <a href="/content/{{ con.id }}/likes"><span >❤</span></a>
@@ -273,7 +278,14 @@
                     <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined">favorite</span></a>
                     {% endif %}
                     <span class="material-icons-outlined"> comment </span>
+
                 </div>
+            </div>
+        </a>
+            <a class="link_txt">
+                전환
+            </a>
+        </div>
 
                 <div>
                     <span class="material-icons-outlined">
@@ -287,9 +299,10 @@
             <div class="feed_content">
                 <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
             </div>
+             </a>
         </div>
-        {% endfor %}       
-    </a>
+        {% endfor %}
+
     </div>
 
     <div class="right_body">
@@ -336,12 +349,13 @@
               </a>
               {% endif %}
             </div>
-        </div>
+
         {% endfor %}
 
         <div class="comment_box">
             <span class="logo-font"> 🍳Sunny Side Up  </span>
-            <span> Created <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise <a> </span>
+            <span> Created by <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise </a> </span>
+
         </div>
     </div>
 

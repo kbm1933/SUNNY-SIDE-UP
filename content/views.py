@@ -1,10 +1,8 @@
-from content.models import ContentModel, ContentComment
+from content.models import ContentModel, ContentComment, ContentModify
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import ContentModel, ContentComment, UserModel
-from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
 
 # Create your views here.
 def home(request):
@@ -66,23 +64,22 @@ def detail_content(request,id):
     return render(request,'content/content_detail.html',{'content':my_content,
     'comment':content_comment,'user_list':user_list})
 
-
-
-# 댓글 작성
 @login_required
-def write_comment(request, id):
+def write_comment(request,id):
     if request.method == 'POST':
-        comment = request.POST.get("comment", "")
+        comment = request.POST.get("comment","")
         current_content = ContentModel.objects.get(id=id)
+
         CC = ContentComment()
         CC.comment = comment
         CC.author = request.user
         CC.contents = current_content
         CC.save()
+
         return redirect('/content/'+str(id))
 
 @login_required
-def delete_comment(request, id):
+def delete_comment(request,id):
     comment = ContentComment.objects.get(id=id)
     current_content = comment.contents.id
     comment.delete()
@@ -90,23 +87,26 @@ def delete_comment(request, id):
 
 @login_required
 def modify_content(request,id):
+    # my_content = ContentModel.objects.get(id=id)
+    # # content_modify = ContentModel.objects.filter(contents=id).order_by('-created_at')
+    # if request.method == 'POST':
+    #     contents = request.POST.get('contents')
+    #     if my_content is not None:
+    #         my_content.contents = contents
+    #         my_content.save()
+    #         return redirect('/content')
+    #
+    # return render(request, 'content/content_modify.html', {'content': my_content})#,'modify-content':content_modify})
     my_content = ContentModel.objects.get(id=id)
     content_modify = ContentModel.objects.filter(contents=id).order_by('-created_at')
-    return render(request, 'content/content_modify.html', {'content': my_content, 'modify': content_modify})
-
-@login_required
-def modify_write_content(request, id):
     if request.method == 'POST':
-        user = request.user
-        contents = request.POST.get('my-content', '')
-        content_title = request.POST.get('my-content-title', '')
-    if contents == '' and content_title == '':
-        all_content = ContentModel.objects.all().order_by('-created_at')
-        return render(request, 'content/home.html', {'error': '글은 공백일 수 없습니다.', 'content': all_content})
-    else:
-        my_content = ContentModel.objects.create(author=user, contents=contents, content_title=content_title)
+        contents = request.POST.get('contents')
+        my_content.contents = contents
         my_content.save()
-        return redirect('/content')
+
+    return render(request, 'content/content_modify.html', {'content': my_content, 'modify-content': content_modify})
+
+
 
 # 좋아요버튼-메인페이지
 @login_required

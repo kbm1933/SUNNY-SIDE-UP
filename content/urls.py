@@ -1,3 +1,4 @@
+# tweet/urls.py
 from django.urls import path
 from . import views
 
@@ -9,7 +10,4 @@ urlpatterns = [
     path('content/comment/<int:id>',views.write_comment,name='write-comment'),
     path('content/comment/delete/<int:id>',views.delete_comment,name='delete-comment'),
     path('content/modify/<int:id>',views.modify_content,name='modify-content'),
-    path('content/<int:id>/likes', views.likes, name = 'likes'),
-    path('content/<int:id>/likes-detail', views.likes_detail, name = 'likes-detail'),
-    path('content/like-content', views.like_content, name='like-post'),
-    ]
+]
