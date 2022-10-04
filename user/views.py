@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
 from django.contrib import auth
+from django.contrib.auth import get_user_model
 
 
 def sign_up_view(request):
