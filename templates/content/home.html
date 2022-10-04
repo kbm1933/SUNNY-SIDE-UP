@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>🍳Sunny-Side-Up</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,8 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
           rel="stylesheet">
-
-</head>
 
 <style>
 
@@ -25,11 +27,14 @@
         font-weight: bold;
     }
 
+    a {
+        text-decoration-line: none;
+        color: inherit;
+    }
+
     .headlight {
-        margin: auto;
+        font-size: 30px;
         font-family: 'Lobster', cursive;
-        position: center;
-        text-align: center;
     }
 
     .margin-right {
@@ -198,40 +203,27 @@
     }
 
 </style>
+</head>
 
 
 <body>
 
-<div class="container" style="width: 100%;height: 50px;position: fixed;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"
+    style = "width: 100%; height:50px; position: fixed;">
+<div class="container">
+  
 
-    <div class="item">
-        <a class="navbar-brand headlight" href="#">🍳Sunny-Side-Up</a>
+   <a class="headlight" href="/">🍳Sunny-Side-Up</a>
+    <input style = "width : 200px " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <div>           
+        <a href="/logout">LOGOUT</a> 
+        <a href="/"><span class="material-symbols-outlined"> home</span></a>
+         <span class="material-symbols-outlined"> add_box</span>
+        <a href="/tweet/like-tweet"> <span class="material-symbols-outlined">favorite</span></a>
     </div>
 
-    <div class="item">
-        <form class="me-auto d-flex">
-            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-dark btn-sm" type="submit">Search</button>
-        </form>
-    </div>
-
-    <div class="item">
-        <ul class="navbar-nav margin-right">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">홈</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="/user/logout">로그아웃</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active">Disabled</a>
-            </li>
-        </ul>
-    </div>
-
-</div>
-
-</div>
+  </div>
+</nav>
 
 
 <div class="main_body">
@@ -259,8 +251,8 @@
         </div>
 
         {% for con in content  %}
-        <a href="/content/{{con.id}}">
         <div class="border feed_box">
+            <a href="/content/{{con.id}}">
             <div class="feed_name">
                 <div class="profile_box">
                     <img class="profile_img"
@@ -272,27 +264,32 @@
                  src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
 
             <div class="feed_icon">
-                <div>
-                    <span class="material-icons-outlined"> favorite_border </span>
+                <div> 
+                    {% comment %} 좋아요 눌려있으면 {% endcomment %}
+                    {% if con in user.likes.all %}
+                    <a href="/content/{{ con.id }}/likes"><span >❤</span></a>
+                    {% else %}
+                    {% comment %} 안눌려있으면 {% endcomment %}
+                    <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined">favorite</span></a>
+                    {% endif %}
                     <span class="material-icons-outlined"> comment </span>
-
                 </div>
 
                 <div>
-          <span class="material-icons-outlined">
-            turned_in_not
-          </span>
+                    <span class="material-icons-outlined">
+                        turned_in_not
+                    </span>
                 </div>
             </div>
             <div class="feed_like">
-                <p class="feed_txt"><b>좋아요 {like.count} 개</b></p>
+                <p class="feed_txt"><b>좋아요 {{ con.liked.count }} 개</b></p>
             </div>
             <div class="feed_content">
                 <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
             </div>
         </div>
         {% endfor %}       
-     </a>
+    </a>
     </div>
 
     <div class="right_body">
