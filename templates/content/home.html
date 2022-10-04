@@ -1,95 +1,355 @@
-<!-- templates/tweet/home.html -->
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
-{% block content %}
-    <div class="container timeline-container">
-        <div class="row">
-            <!-- 왼쪽 컬럼 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ user.username}}</h5>
-                        <p class="card-text">{{ user.bio }}</p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+          rel="stylesheet">
 
-                    </div>
+</head>
+
+<style>
+
+    . * {
+
+    }
+
+    .hyperlink {
+        text-decoration-line: none;
+        font-weight: bold;
+    }
+
+    .headlight {
+        margin: auto;
+        font-family: 'Lobster', cursive;
+        position: center;
+        text-align: center;
+    }
+
+    .margin-right {
+        margin-right: 300px;
+    }
+
+    {#코드 참조#}
+    .main_body {
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+        background-color: #FAFAFA;
+    }
+
+    .left_body {
+        margin-right: 100px;
+        width: 500px;
+        height: 2000px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .right_body {
+        padding-top: 20px;
+        width: 300px;
+        height: 1000px;
+        left: 72%;
+        position: fixed
+    }
+
+    .feed_box {
+        background-color: white;
+        width: 400px;
+        margin: 10px;
+        min-height: auto;
+        padding-bottom: 10px;
+        border-radius: 5px;
+    }
+
+    .feed_img {
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .feed_content {
+        padding: 0px 10px;
+    }
+
+    .feed_like {
+        padding: 0px 10px;
+    }
+
+    .feed_reply {
+        padding: 0px 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .feed_txt {
+        font-size: 14px;
+    }
+
+
+    .feed_icon {
+        padding: 10px 5px 10px 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    span {
+        padding-right: 5px;
+    }
+
+    .feed_name {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .feed_name_txt {
+        font-size: 14px;
+        padding: 0px 10px;
+        font-weight: bold;
+    }
+
+    .profile_box {
+        width: 40px;
+        height: 40px;
+        border-radius: 70%;
+        overflow: hidden;
+    }
+
+    .profile_img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .name_content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .name_content_txt {
+        font-size: 12px;
+        padding: 0px 10px;
+        font-weight: bold;
+        color: lightgray;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 190px;
+    }
+
+    .big_profile_box {
+        width: 60px;
+        height: 60px;
+        border-radius: 70%;
+        overflow: hidden;
+    }
+
+    .link_txt {
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .recommend_box {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        align-items: center;
+    }
+
+    .comment_box {
+        margin: 40px 0 0 5px;
+        font-size: 12px;
+        font-weight: normal;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+    }
+
+    .logo-font {
+        font-family: 'Lobster', cursive;
+        font-size: 20px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .write_content{
+        background-color: white;
+        width: 400px;
+        margin: 10px;
+        min-height: auto;
+        padding-bottom: 10px;
+        border-radius: 5px;
+    }
+
+</style>
+
+
+<body>
+
+<div class="container" style="width: 100%;height: 50px;position: fixed;">
+
+    <div class="item">
+        <a class="navbar-brand headlight" href="#">🍳Sunny-Side-Up</a>
+    </div>
+
+    <div class="item">
+        <form class="me-auto d-flex">
+            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-dark btn-sm" type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="item">
+        <ul class="navbar-nav margin-right">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">홈</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/user/logout">로그아웃</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active">Disabled</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+</div>
+
+
+<div class="main_body">
+    <div class="left_body">
+        
+        <div class="border feed_box">
+            <div class="feed_name">
+                <div class="profile_box">
+                    <img class="profile_img"
+                         src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
+                </div>
+                <form action="/content/" method="post">
+                    {% csrf_token %}
+                <span class="feed_name_txt"> {{ user }} </span>
+            </div>
+
+            <div class="mb-3">
+            <label for="my-content" class="form-label">CONTENT</label>
+            <textarea class="form-control" id="my-content" name="my-content" rows="3"></textarea>
+            </div>
+
+            <hr>
+            <button type="submit" class="btn btn-outline-info">게시</button>
+        </form>
+        </div>
+
+        {% for con in content  %}
+        <a href="/content/{{con.id}}">
+        <div class="border feed_box">
+            <div class="feed_name">
+                <div class="profile_box">
+                    <img class="profile_img"
+                         src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
+                </div>
+                <span class="feed_name_txt"> {{ con.author }} </span>
+            </div>
+            <img class="feed_img"
+                 src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
+
+            <div class="feed_icon">
+                <div>
+                    <span class="material-icons-outlined"> favorite_border </span>
+                    <span class="material-icons-outlined"> comment </span>
+
+                </div>
+
+                <div>
+          <span class="material-icons-outlined">
+            turned_in_not
+          </span>
                 </div>
             </div>
-            <!-- 오른 쪽 컬럼-->
-            <div class="col-md-7">
-                <!-- 글을 작성 하는 곳 -->
-                <div class="row mb-2">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="media-body">
-{#                                        <h5 class="mt-0">나의 이야기를 적어주세요</h5>#}
-
-                                        <p>
-                                        <form action="/content/" method="post">
-
-                                            {% csrf_token %}
-                                            {% if error %}
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{ error }}
-                                                </div>
-                                            {% endif %}
-                                         <div class="form-group mb-2">
-                                                <textarea class="form-control" style="resize: none" name='my-content-title' id="my-content-title"></textarea>
-                                        </div>
-                                            <div class="form-group mb-2">
-                                                <textarea class="form-control" style="resize: none" name='my-content' id="my-content"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary" style="float:right;">작성하기</button>
-                                        </form>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <!-- 작성 된 글이 나오는 곳 -->
-                <div class="row">
-                    {% for con in content %}
-                    <div class="col-md-12 mb-2">
-                        <div class="card">
-                            <div class="card-body">
-                                {% if con.author == user %}
-                                <div style="text-align: right">
-                                    <a href="/content/delete/{{ con.id }}">
-                                        <span class="badge rounded-pill bg-danger">삭제</span>
-                                    </a>
-                                </div>
-                                {% endif %}
-                                <div style="text-align: right">
-                                    <a href="/content/{{ con.id }}">
-                                        <span class="badge rounded-pill bg-success">보기</span>
-                                    </a>
-                                </div>
-                                <div style="text-align: right">
-                                    <a href="/content/modify/{{ con.id }}">
-                                        <span class="badge rounded-pill bg-success">수정</span>
-                                    </a>
-                                </div>
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h5 class="mt-0">{{ con.content_title }}</h5>
-                                        <h5 class="mt-0">{{ con.contents }}</h5>
-                                    </div>
-                                    <div style="text-align: right">
-                                        <span style="font-size: small">{{ con.author.username }}-{{ con.created_at|timeuntil}} 전</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-
+            <div class="feed_like">
+                <p class="feed_txt"><b>좋아요 {like.count} 개</b></p>
             </div>
-            <div class="col-md-2"></div>
+            <div class="feed_content">
+                <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
+            </div>
+        </div>
+        {% endfor %}       
+     </a>
+    </div>
+
+    <div class="right_body">
+        <div class="feed_name" style="justify-content: space-between">
+            <a href="/user/my-profile">
+            <div style="display: flex; align-items: center; ">
+                <div class="big_profile_box">
+                    <img class="profile_img"
+                         src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/s1080x2048/165180104_277246477102900_6106347261862438192_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=730e14&_nc_ohc=1sN4d8i7rn8AX-7aKYN&_nc_ht=scontent-ssn1-1.xx&oh=5049b7cd176848e330b0f5ea95f28172&oe=615A08D1">
+                </div>
+                <div class="name_content">
+                    <span class="feed_name_txt"> {{ user }} </span>
+                    <span class="name_content_txt"> Moon Kyujin</span>
+                </div>
+            </div>
+        </a>
+            <a class="link_txt">
+                전환
+            </a>
+        </div>
+
+        <div class="recommend_box">
+            <span style="color: gray"> 회원님을 위한 추천</span>
+            <span style="font-size: 12px"> 모두 보기 </span>
+        </div>
+        {% for ul in user_list %}
+        <div>
+            <div class="feed_name" style="justify-content: space-between">
+              <div class="profile_box">
+                <img class="profile_img"
+                     src="https://i.pinimg.com/736x/93/a6/8b/93a68b57a54e4bdc73d43d1d049b94b3.jpg">
+              </div>
+              <div class="name_content">
+                <span class="feed_name_txt"> {{ ul.username }} </span>
+                <span class="name_content_txt"> Iinstargram 신규가입</span>
+              </div>
+              {% if ul in user.follow.all %}
+              <a class="link_txt" href="/user/follow/{{ul.id}}">
+                팔로우취소
+              </a>
+              {% else %}
+              <a class="link_txt" href="/user/follow/{{ul.id}}">
+                팔로우
+              </a>
+              {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="comment_box">
+            <span class="logo-font"> 🍳Sunny Side Up  </span>
+            <span> Created <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise <a> </span>
         </div>
     </div>
-{% endblock %}
+
+</div>
+
+</body>
+
+</html>
