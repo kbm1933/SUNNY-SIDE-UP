@@ -16,7 +16,7 @@ class ContentModel(models.Model):
 class ContentComment(models.Model):
     class Meta:
         db_table = "comment"
-
+    #content 중복으로 삭제
     contents = models.ForeignKey(ContentModel, on_delete=models.CASCADE)
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     comment = models.CharField(max_length=256)
