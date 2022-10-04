@@ -60,6 +60,14 @@
         color: cornflowerblue;
         font-weight: bold;
     }
+   
+    .error_msg{
+        background-color : rgb(244, 91, 91);
+        border-radius: 5%;
+        color: beige;
+        text-align: center;
+
+    }
 
 </style>
 
@@ -68,19 +76,24 @@
 <div class="wrap-top">
 
     <h1 class="headlight"> 🍳Sunny-Side-Up </h1>
-
+<form  method="post" action="/sign-in/">
+    {% csrf_token %}
     <div class="mb-3">
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="사용자 이름">
+        <input type="text" class="form-control" id="username" name="username" placeholder="사용자 이름">
         <p></p>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="비밀번호">
+        <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
     </div>
-
-    <button type="button" class="mybtn btn btn-primary">로그인</button>
-
+    {% if error %}
+    <div class="error_msg" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+    <button type="submit" class="mybtn btn btn-primary">로그인</button>
+</form>
 </div>
 
 <div class="wrap-bottom">
-    <h8> 아직 계정이 없으신가요? <a class="sign-up-btn-color" href="...">가입하기</a></h8>
+    <h8> 아직 계정이 없으신가요? <a class="sign-up-btn-color" href="/sign-up">가입하기</a></h8>
 </div>
 
 </body>

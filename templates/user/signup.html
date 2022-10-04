@@ -73,6 +73,14 @@
         border-bottom: 0;
         margin: auto;
     }
+    
+    .error_msg{
+        background-color : rgb(244, 91, 91);
+        border-radius: 5%;
+        color: beige;
+        text-align: center;
+
+    }
 
 
 
@@ -85,20 +93,29 @@
 
     <h1 class="headlight"> 🍳Sunny-Side-Up </h1>
     <p> 친구들의 소식이 궁금하시다면 가입하세요! </p>
+<form method = 'POST' action = "/sign-up/">
+    {% csrf_token %}
 
     <div class="mb-3">
-        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="이메일 주소">
-        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="성명">
-        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="사용자 이름">
-        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="비밀번호">
-        <input type="email" class="my-input form-control" id="exampleFormControlInput1" placeholder="비밀번호 확인">
-        <button type="button" class="mybtn btn btn-primary">가입</button>
+        <input type="text" class="my-input form-control" id="username" name="username" placeholder="사용자 이름">
+        <input type="password" class="my-input form-control" id="password" name="password" placeholder="비밀번호">
+        <input type="password" class="my-input form-control" id="password2" name="password2" placeholder="비밀번호 확인">
+       
+        {% if error %}
+            <div class="error_msg" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <button type="submit" class="mybtn btn btn-primary">가입</button>
     </div>
+
+
+</form>
 
 </div>
 
 <div class="wrap-bottom">
-    <h8> 계정이 있으신가요? <a class="sign-up-btn-color" href="...">로그인</a></h8>
+    <h8> 계정이 있으신가요? <a class="sign-up-btn-color" href="/sign-in">로그인</a></h8>
 </div>
 
 </body>
