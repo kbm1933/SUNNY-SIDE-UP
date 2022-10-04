@@ -1,28 +1,9 @@
 
         {% extends 'base.html' %}
         {% block body %}
-        <div class="border feed_box">
-            <div class="feed_name">
-                <div class="profile_box">
-                    <img class="profile_img"
-                         src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
-                </div>
-                <form action="/content/" method="post">
-                    {% csrf_token %}
-                <span class="feed_name_txt"> {{ user }} </span>
-            </div>
-
-            <div class="mb-3">
-            <label for="my-content" class="form-label">CONTENT</label>
-            <textarea class="form-control" id="my-content" name="my-content" rows="3"></textarea>
-            </div>
-
-            <hr>
-            <button type="submit" class="btn btn-outline-info">게시</button>
-        </form>
-        </div>
 
         {% for con in content  %}
+        {% if con in user.likes.all %}
         <div class="border feed_box">
             <a href="/content/{{con.id}}">
             <div class="feed_name">
@@ -60,6 +41,7 @@
                 <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
             </div>
         </div>
+        {% endif %}
         {% endfor %}       
     </a>
     {% endblock body %}
