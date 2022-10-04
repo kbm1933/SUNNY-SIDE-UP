@@ -15,21 +15,19 @@ class ContentModel(models.Model):
 
 class ContentComment(models.Model):
     class Meta:
-        db_table = "comment"
-    #content 중복으로 삭제함
+        db_table = 'comment'
+
     contents = models.ForeignKey(ContentModel, on_delete=models.CASCADE)
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     comment = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
 class ContentModify(models.Model):
     class Meta:
         db_table = 'modify'
 
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
-    contents = models.CharField(max_length=256)
-    content_title = models.CharField(max_length=256, null=True)
+    contents = models.CharField(max_length=256,null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

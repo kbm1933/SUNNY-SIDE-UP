@@ -13,7 +13,7 @@
                         <div class="media">
                             <div class="media-body">
                                 <p>
-                                <form action="/content/" method="post">
+                                <form action="/content/{{ content.id }}" method="post">
 
                                     {% csrf_token %}
                                     {% if error %}
@@ -21,15 +21,13 @@
                                             {{ error }}
                                         </div>
                                     {% endif %}
+
                                     <div class="form-group mb-2">
-                                        <textarea class="form-control" style="resize: none" name='my-content-title'
-                                                  id="my-content-title"></textarea>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <textarea class="form-control" style="resize: none" name='my-content'
-                                                  id="my-content"></textarea>
+                                        <textarea class="form-control" style="resize: none" name='modify-content'
+                                                  id="modify-content">{{ content.contents }}</textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary" style="float:right;">작성하기</button>
+
                                 </form>
                                 </p>
                             </div>
