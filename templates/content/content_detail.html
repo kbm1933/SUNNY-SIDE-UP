@@ -281,15 +281,15 @@
                     <b>{{ cm.author }}</b>
                     {{ cm.comment }}
                     <br>
+                    {% if cm.author == user %}
+                    <div class="comment_delete" style="float: right">
+                        <a href="/content/comment/delete/{{ cm.id }}">
+                            <span class="badge bg-danger">삭제</span>
+                        </a>
+                    </div>
+                    {% endif %}
                     {{ cm.created_at|timesince }} 전
                 </span>
-                {% if cm.author == user %}
-                <div class="comment_delete" style="float: right">
-                    <a href="/content/comment/delete/{{ cm.id }}">
-                        <span class="badge bg-danger">삭제</span>
-                    </a>
-                </div>
-                {% endif %}
             </div>
 
             {% endfor %}
