@@ -84,7 +84,7 @@ def write_comment(request, id):
 @login_required
 def delete_comment(request, id):
     comment = ContentComment.objects.get(id=id)
-    current_content = comment.content.id
+    current_content = comment.contents.id
     comment.delete()
     return redirect('/content/'+str(current_content))
 
