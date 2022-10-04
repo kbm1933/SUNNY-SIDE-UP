@@ -63,17 +63,7 @@ def detail_content(request,id):
     content_comment = ContentModel.objects.filter(contents = id).order_by('-created_at')
     return render(request,'content/content_detail.html',{'content':my_content,'comment':content_comment})
 
-@login_required
-def write_comment(request,id):
-    if request.method == 'POST':
-        comment = request.POST.get("comment","")
-        
-# 상세 페이지
-@login_required
-def detail_tweet(request, id):
-    my_content = ContentModel.objects.get(id=id)
-    content_comment = ContentComment.objects.filter(content_id=id).order_by('-created_at')
-    return render(request, 'content/content_detail.html', {'content': my_content, 'comment': content_comment})
+
 
 # 댓글 작성
 @login_required
