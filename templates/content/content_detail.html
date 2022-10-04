@@ -10,8 +10,10 @@
                 <span class="feed_name_txt"> {{ content.author }} </span>
                 <span class="feed_name_txt">{{ content.created_at|timesince }} 전 </span>
             </div>
-            <img class="feed_img"
-                 src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
+            {% for photo in content.photo_set.all  %}
+            <img class="feed_img" src = '{{ photo.image.url }}'><br>
+
+                 {% endfor %}
 
             <div class="feed_icon">
                 <div> 
@@ -75,7 +77,7 @@
                             <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                         </div>
                         <br>
-                    <button type="submit" class="btn btn-outline-info">게시</button>
+                    <button type="submit" class="post_btn">게시</button>
                 </form>
                 {% endblock body %}
        

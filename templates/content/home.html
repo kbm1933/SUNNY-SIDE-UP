@@ -7,35 +7,37 @@
                     <img class="profile_img"
                          src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
                 </div>
-                <form action="/content/" method="post">
+                <form action="/content/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                 <span class="feed_name_txt"> {{ user }} </span>
             </div>
-
+            <label for="imgs" class="form-label">PHOTO</label><br>
+            <input class = 'photo_btn' type="file" id ='imgs' name='imgs' multiple>
             <div class="mb-3">
             <label for="my-content" class="form-label">CONTENT</label>
             <textarea class="form-control" id="my-content" name="my-content" rows="3"></textarea>
             </div>
 
             <hr>
-            <button type="submit" class="btn btn-outline-info">게시</button>
+            <button type="submit" class="post_btn">게시</button>
         </form>
         </div>
 
         {% for con in content  %}
         <div class="border feed_box">
-            <a href="/content/{{con.id}}">
             <div class="feed_name">
                 <div class="profile_box">
                     <img class="profile_img"
-                         src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
+                    src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
                 </div>
                 <span class="feed_name_txt"> {{ con.author }} </span>
             </div>
-            <img class="feed_img"
-                 src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
+            <a href="/content/{{con.id}}">
+                {% for photo in con.photo_set.all  %}
+            <img class="feed_img" src = '{{ photo.image.url }}'><br>
 
-            <div class="feed_icon">
+                 {% endfor %}
+                 <div class="feed_icon">
                 <div> 
                     {% comment %} 좋아요 눌려있으면 {% endcomment %}
                     {% if con in user.likes.all %}

@@ -1,4 +1,4 @@
-from content.models import ContentModel, ContentComment, UserModel, ContentModify
+from content.models import ContentModel, ContentComment, UserModel, Photo, ContentModify
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -42,6 +42,14 @@ def content(request):
         else:
             my_content = ContentModel.objects.create(author=user,contents=contents)
             my_content.save()
+
+            # 이미지 추가
+            for img in request.FILES.getlist('imgs'):
+                photo = Photo()
+                photo.post = my_content
+                photo.image = img
+                photo.save()
+
             return redirect('/content')
 
 @login_required
