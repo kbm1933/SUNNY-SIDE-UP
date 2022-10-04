@@ -3,7 +3,7 @@ from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-
+#
 # Create your views here.
 def home(request):
     #로그인이 되어 있다면

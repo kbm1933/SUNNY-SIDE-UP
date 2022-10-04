@@ -1,4 +1,4 @@
-#content.py models
+#content.py modelsdd
 from django.db import models
 from user.models import UserModel
 
