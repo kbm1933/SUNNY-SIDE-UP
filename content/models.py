@@ -1,6 +1,7 @@
 #content.py modelsdd
 from django.db import models
 from user.models import UserModel
+from django.conf import settings
 
 # Create your models here.
 class ContentModel(models.Model):
@@ -11,7 +12,7 @@ class ContentModel(models.Model):
     contents = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    liked = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name ='likes')
 
 class ContentComment(models.Model):
     class Meta:

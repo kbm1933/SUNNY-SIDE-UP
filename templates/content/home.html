@@ -213,11 +213,11 @@
     style = "width: 100%; height:50px; position: fixed;">
 <div class="container">
 
-
    <a class="headlight" href="/">🍳Sunny-Side-Up</a>
     <input style = "width : 200px " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
     <div>
         <a href="/logout">LOGOUT</a>
+
         <a href="/"><span class="material-symbols-outlined"> home</span></a>
          <span class="material-symbols-outlined"> add_box</span>
         <a href="/tweet/like-tweet"> <span class="material-symbols-outlined">favorite</span></a>
@@ -229,8 +229,10 @@
 
 <div class="main_body">
     <div class="left_body">
+    
 
         <div class="border feed_box">
+
             <div class="feed_name">
                 <div class="profile_box">
                     <img class="profile_img"
@@ -276,7 +278,14 @@
                     <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined">favorite</span></a>
                     {% endif %}
                     <span class="material-icons-outlined"> comment </span>
+
                 </div>
+            </div>
+        </a>
+            <a class="link_txt">
+                전환
+            </a>
+        </div>
 
                 <div>
                     <span class="material-icons-outlined">
@@ -340,12 +349,13 @@
               </a>
               {% endif %}
             </div>
-        </div>
+
         {% endfor %}
 
         <div class="comment_box">
             <span class="logo-font"> 🍳Sunny Side Up  </span>
-            <span> Created <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise </a> </span>
+            <span> Created by <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise </a> </span>
+
         </div>
     </div>
 
