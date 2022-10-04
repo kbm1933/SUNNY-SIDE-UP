@@ -2,7 +2,7 @@ from content.models import ContentModel, ContentComment
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import ContentModel, ContentComment
+from .models import ContentModel, ContentComment, UserModel
 from django.contrib.auth.decorators import login_required
 
 
@@ -28,8 +28,9 @@ def content(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
         if user:#로그인이 되어 있다면
+            user_list = UserModel.objects.all().exclude(username = request.user.username)
             all_content = ContentModel.objects.all().order_by('-created_at')
-            return render(request,'content/home.html',{'content':all_content})
+            return render(request,'content/home.html',{'content':all_content, 'user_list':user_list})
         else:#로그인이 안되어 있다면
             return redirect('/sign-in')
 
@@ -60,8 +61,10 @@ def delete_content(request,id):
 @login_required
 def detail_content(request,id):
     my_content = ContentModel.objects.get(id=id)
-    content_comment = ContentModel.objects.filter(contents = id).order_by('-created_at')
-    return render(request,'content/content_detail.html',{'content':my_content,'comment':content_comment})
+    user_list = UserModel.objects.all().exclude(username = request.user.username)
+    content_comment = ContentComment.objects.filter(contents = id).order_by('-created_at')
+    return render(request,'content/content_detail.html',{'content':my_content,
+    'comment':content_comment,'user_list':user_list})
 
 
 
@@ -74,7 +77,7 @@ def write_comment(request, id):
         CC = ContentComment()
         CC.comment = comment
         CC.author = request.user
-        CC.content = current_content
+        CC.contents = current_content
         CC.save()
         return redirect('/content/'+str(id))
 
