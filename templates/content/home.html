@@ -40,7 +40,8 @@
                     <div>
                         {% comment %} 좋아요 눌려있으면 {% endcomment %}
                         {% if con in user.likes.all %}
-                            <a href="/content/{{ con.id }}/likes"><span>❤</span></a>
+                            <a href="/content/{{ con.id }}/likes"><span
+                                    class="material-symbols-outlined" style="color: red;">favorite</span></a>
                         {% else %}
                             {% comment %} 안눌려있으면 {% endcomment %}
                             <a href="/content/{{ con.id }}/likes"><span
