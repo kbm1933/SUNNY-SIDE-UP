@@ -236,9 +236,8 @@
    <a class="headlight" href="/">🍳Sunny-Side-Up</a>
     <input style = "width: 200px; height: 30px; " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
     <div>           
-        <a href="/logout">LOGOUT</a> 
+        <a href="/logout"><span class="material-symbols-outlined">logout</span>
         <a href="/"><span class="material-symbols-outlined"> home</span></a>
-         <span class="material-symbols-outlined"> add_box</span>
         <a href="/content/like-content"> <span class="material-symbols-outlined">favorite</span></a>
     </div>
 
@@ -287,7 +286,7 @@
               </div>
               {% if ul in user.follow.all %}
               <a class="link_txt" href="/user/follow/{{ul.id}}">
-                팔로우취소
+                팔로우 취소
               </a>
               {% else %}
               <a class="link_txt" href="/user/follow/{{ul.id}}">
