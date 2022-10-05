@@ -15,10 +15,7 @@
                 </a>
             {% endif %}
         </div>
-        {% for photo in content.photo_set.all %}
-            <img class="feed_img" src='{{ photo.image.url }}'><br>
-
-        {% endfor %}
+            <img class="feed_img" src='{{ content.image.url }}'><br>
 
         <div class="feed_icon">
             <div>

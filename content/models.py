@@ -19,10 +19,6 @@ class ContentModel(models.Model):
         return self.author
 
 
-class Photo(models.Model):
-    post = models.ForeignKey(ContentModel, on_delete=models.CASCADE, null = True)
-    image = models.ImageField(upload_to = 'images/', blank = True, null = True)
-
 class ContentComment(models.Model):
     class Meta:
         db_table = 'comment'
