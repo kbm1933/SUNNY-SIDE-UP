@@ -1,41 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="border feed_box" style="padding: 20px;">
-    <div class="feed_name">
-        <div class="profile_box">
-            <img class="profile_img"
-                src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
-        </div>
-        <form action="/content/" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <span class="feed_name_txt"> {{ user }} </span>
-    </div>
-
-    <div class="mb-3" style="margin-top: 20px; margin-bottom: 20px;">
-            <label for=" exampleFormControlTextarea1 " class=" form-label" style="font-weight: normal"> {{ user }}님, 무슨
-        생각을 하고 계신가요? </label>
-        <textarea class="form-control" id="my-content" name="my-content" rows="3" style="margin-top: 20px;"> </textarea>
-    </div>
-
-
-    <label for="imgs" class="form-label" style="font-weight:bold; margin-top: 20px; margin-bottom: 10px;">
-        🤳사진 또는 동영상을 선택하세요 </label>
-    <input class='photo_btn' type="file" id='imgs' name='imgs' multiple Required>
-    <div style="text-align: center; margin-top: 40px;">
-        <button type="submit" class="btn btn-outline-dark" class="post_btn">게시</button>
-       </form>
-                                    
-    </div>
-
-</div>
 
 {% for con in content %}
+{% if con in user.likes.all %}
 <div class="border feed_box" style="padding: 10px;">
     <div class="feed_name">
         <div class="profile_box">
             <img class="profile_img"
                 src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
-
         </div>
         <span class="feed_name_txt"> {{ con.author }} </span>
     </div>
@@ -43,7 +15,7 @@
     <img class="feed_img" src='{{ photo.image.url }}'><br>
 
     {% endfor %}
-                         
+
     <div class="feed_icon">
         <div>
             {% comment %} 좋아요 눌려있으면 {% endcomment %}
@@ -56,6 +28,7 @@
             {% endif %}
             <a href="/content/{{ con.id }}"><span class="material-icons-outlined"> comment </span></a>
         </div>
+
         <div>
             <span class="material-icons-outlined">
                 turned_in_not
@@ -69,6 +42,7 @@
         <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
     </div>
 </div>
+{% endif %}
 {% endfor %}
 </a>
 {% endblock body %}

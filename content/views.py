@@ -1,5 +1,4 @@
 from content.models import ContentModel, ContentComment, UserModel,Photo
-
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
