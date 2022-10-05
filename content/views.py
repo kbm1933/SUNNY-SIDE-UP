@@ -1,5 +1,5 @@
-from content.models import ContentModel, ContentComment, UserModel, Photo
-# from .models import Photo
+from content.models import ContentModel, ContentComment, UserModel
+from .models import Photo
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -94,7 +94,7 @@ def delete_comment(request,id):
     comment.delete()
     return redirect('/content/'+str(current_content))
 
-# 게시글 수정
+# 게시글  수정
 @login_required
 def modify_content(request, id):
     my_content = ContentModel.objects.get(id=id)
