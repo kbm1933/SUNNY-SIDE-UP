@@ -1,389 +1,102 @@
-<!DOCTYPE html>
-{#detail#}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base.html' %}
+{% block body %}
 
-    <title>🍳Sunny-Side-Up</title>
-
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-          rel="stylesheet">
-
-
-    <style>
-
-        . * {
-
-        }
-
-        .hyperlink {
-            text-decoration-line: none;
-            font-weight: bold;
-        }
-
-        a {
-            text-decoration-line: none;
-            color: inherit;
-        }
-
-        .headlight {
-            font-size: 30px;
-            font-family: 'Lobster', cursive;
-        }
-
-        .margin-right {
-            margin-right: 300px;
-        }
-
-        {#코드 참조#}
-        .main_body {
-            display: flex;
-            justify-content: center;
-            padding-top: 50px;
-            background-color: #FAFAFA;
-        }
-
-        .left_body {
-            margin-right: 100px;
-            width: 500px;
-            height: 2000px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .right_body {
-            padding-top: 20px;
-            width: 300px;
-            height: 1000px;
-            left: 72%;
-            position: fixed
-        }
-
-        .feed_box {
-            background-color: white;
-            width: 400px;
-            margin: 10px;
-            min-height: auto;
-            padding-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        .feed_img {
-            width: 100%;
-            object-fit: contain;
-        }
-
-        .feed_content {
-            padding: 0px 10px;
-        }
-
-        .feed_like {
-            padding: 0px 10px;
-        }
-
-        .feed_reply {
-            padding: 0px 10px;
-            display: flex;
-            flex-direction: column;
-        }
-
-
-        .feed_txt {
-            font-size: 14px;
-        }
-
-
-        .feed_icon {
-            padding: 10px 5px 10px 5px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        span {
-            padding-right: 5px;
-        }
-
-        .feed_name {
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .feed_name_txt {
-            font-size: 14px;
-            padding: 0px 10px;
-            font-weight: bold;
-        }
-
-        .profile_box {
-            width: 40px;
-            height: 40px;
-            border-radius: 70%;
-            overflow: hidden;
-        }
-
-        .profile_img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .name_content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .name_content_txt {
-            font-size: 12px;
-            padding: 0px 10px;
-            font-weight: bold;
-            color: lightgray;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 190px;
-        }
-
-        .big_profile_box {
-            width: 60px;
-            height: 60px;
-            border-radius: 70%;
-            overflow: hidden;
-        }
-
-        .link_txt {
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .recommend_box {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px;
-            font-size: 14px;
-            font-weight: bold;
-            align-items: center;
-        }
-
-        .comment_box {
-            margin: 40px 0 0 5px;
-            font-size: 12px;
-            font-weight: normal;
-            color: black;
-            display: flex;
-            flex-direction: column;
-            text-align: right;
-        }
-
-        .logo-font {
-            font-family: 'Lobster', cursive;
-            font-size: 20px;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .write_content {
-            background-color: white;
-            width: 400px;
-            margin: 10px;
-            min-height: auto;
-            padding-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        .write_comment {
-            background-color: white;
-            width: 400px;
-            margin: 10px;
-            min-height: auto;
-            padding-bottom: 10px;
-            border-radius: 5px;
-        }
-
-    </style>
-
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light"
-     style="width: 100%; height:50px; position: fixed;">
-    <div class="container">
-
-
-        <a class="headlight" href="/">🍳Sunny-Side-Up</a>
-        <input style="width : 200px " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <div>
-            <a href="/logout">LOGOUT</a>
-            <a href="/"><span class="material-symbols-outlined"> home</span></a>
-            <span class="material-symbols-outlined"> add_box</span>
-            <a href="/tweet/like-tweet"> <span class="material-symbols-outlined">favorite</span></a>
-        </div>
-
-    </div>
-</nav>
-
-
-<div class="main_body">
-    <div class="left_body">
-
-
-        <div class="border feed_box">
-            <div class="feed_name">
-                <div class="profile_box">
-                    <img class="profile_img"
-                         src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
-                </div>
-                <span class="feed_name_txt"> {{ content.author }} </span>
-                <span class="feed_name_txt">{{ content.created_at|timesince }} 전 </span>
+    <div class="border feed_box">
+        <div class="feed_name">
+            <div class="profile_box">
+                <img class="profile_img"
+                     src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
             </div>
-            <img class="feed_img"
-                 src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
+            <span class="feed_name_txt"> {{ content.author }} </span>
+            <span class="feed_name_txt" style="font-weight: normal">{{ content.created_at|timesince }} 전 </span>
+            {% if user == content.author %}
+                <a href="/content/delete/{{ content.id }}">
+                    <span class="material-symbols-outlined"> delete </span>
+                </a>
+            {% endif %}
+        </div>
+        {% for photo in content.photo_set.all %}
+            <img class="feed_img" src='{{ photo.image.url }}'><br>
 
-            <div class="feed_icon">
-                <div>
-                    {% comment %} 좋아요 눌려있으면 {% endcomment %}
-                    {% if content in user.likes.all %}
-                        <a href="/content/{{ content.id }}/likes-detail"><span>❤</span></a>
-                    {% else %}
-                        {% comment %} 안눌려있으면 {% endcomment %}
-                        <a href="/content/{{ content.id }}/likes-detail"><span class="material-symbols-outlined">favorite</span></a>
-                    {% endif %}
-                    <span class="material-icons-outlined"> comment </span>
-                </div>
+        {% endfor %}
 
-                <div>
+        <div class="feed_icon">
+            <div>
+                {% comment %} 좋아요 눌려있으면 {% endcomment %}
+                {% if content in user.likes.all %}
+                    <a href="/content/{{ content.id }}/likes-detail">
+                        <span class="material-symbols-outlined" style="color:red;">favorite</span></a>
+                {% else %}
+                    {% comment %} 안눌려있으면 {% endcomment %}
+                    <a href="/content/{{ content.id }}/likes-detail"><span
+                            class="material-symbols-outlined">favorite</span></a>
+                {% endif %}
+                <span class="material-icons-outlined"> comment </span>
+            </div>
+
+            <div>
                     <span class="material-icons-outlined">
                         turned_in_not
                     </span>
-                </div>
             </div>
-            <div class="feed_like">
-                <p class="feed_txt"><b>좋아요 {{ content.liked.count }} 개</b></p>
-            </div>
-            <div class="feed_content">
-                <p class="feed_txt"><b> {{ content.author }} </b> {{ content.contents }} </p>
-            </div>
-            <div class="modify_content" style="float: right">
-                <a href="/content/modify/{{ content.id }}">
-                    <span class="badge bg-success">수정</span>
-                </a>
-            </div>
-            {% for cm in comment %}
-                <div class="feed_reply">
+        </div>
+        <div class="feed_like">
+            <p class="feed_txt"><b>좋아요 {{ content.liked.count }} 개</b></p>
+        </div>
+        <div class="feed_content">
+            <p class="feed_txt"><b> {{ content.author }} </b> {{ content.contents }} </p>
+        </div>
+        <div class="modify_content" style="float: right">
+            <a href="/content/modify/{{ content.id }}">
+                <span class="badge bg-success">수정</span>
+            </a>
+        </div>
+        <div style="text-align: right">
+            <a href="/content/delete/{{ content.id }}">
+                <span class="badge rounded-pill bg-danger">삭제</span>
+            </a>
+        </div>
+        {% for cm in comment %}
+            <div class="feed_reply">
                 <span class="feed_txt">
                     <b>{{ cm.author }}</b>
                     {{ cm.comment }}
                     <br>
                     {% if cm.author == user %}
                         <div class="comment_delete" style="float: right">
-                            <a href="/content/comment/delete/{{ cm.id }}">
-                                <span class="badge bg-danger">삭제</span>
-                            </a>
-                        </div>
-
+                        <a href="/content/comment/delete/{{ cm.id }}">
+                            <span class="badge bg-danger">삭제</span>
+                        </a>
+                    </div>
                     {% endif %}
                     {{ cm.created_at|timesince }} 전
                 </span>
-                </div>
+            </div>
 
-            {% endfor %}
-        </div>
+        {% endfor %}
+    </div>
 
-        <div class="write_comment">
-            <div class="feed_name">
-                <div class="profile_box">
-                    <img class="profile_img"
-                         src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBIWFRgSFRUYGBgYGBIYGRgYGBgYEhgYGBgZGRgYGBgcIS4lHB4rHxgYJjg
+    <div class="write_comment">
+        <div class="feed_name">
+            <div class="profile_box">
+                <img class="profile_img"
+                     src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBIWFRgSFRUYGBgYGBIYGRgYGBgYEhgYGBgZGRgYGBgcIS4lHB4rHxgYJjg
                         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
                         saKKI2tpq9qiiJRQcooqyqeqqfvs/Wz+4IKI1GLtj/AH3fp/7nK/2T/wB+p/8Am3+9BRP10v8AzenfqevyCrx2rf6v7VFFp5Iqxeo/V/61md7ng30UUSDCoooiv//Z">
-                </div>
-                <form action="/content/comment/{{ content.id }}" method="post">
-                    {% csrf_token %}
-                    <span class="feed_name_txt"> {{ user }} </span>
-
-                    <div>
-                        <label for="comment" class="form-label">COMMENT</label>
-                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-outline-info">게시</button>
-                </form>
             </div>
-        </div>
+            <form action="/content/comment/{{ content.id }}" method="post">
+                {% csrf_token %}
+                <span class="feed_name_txt"> {{ user }} </span>
 
-    </div>
-
-    <div class="right_body">
-        <div class="feed_name" style="justify-content: space-between">
-            <a href="/user/my-profile">
-                <div style="display: flex; align-items: center; ">
-                    <div class="big_profile_box">
-                        <img class="profile_img"
-                             src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/s1080x2048/165180104_277246477102900_6106347261862438192_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=730e14&_nc_ohc=1sN4d8i7rn8AX-7aKYN&_nc_ht=scontent-ssn1-1.xx&oh=5049b7cd176848e330b0f5ea95f28172&oe=615A08D1">
-                    </div>
-                    <div class="name_content">
-                        <span class="feed_name_txt"> {{ user }} </span>
-                        <span class="name_content_txt"> Moon Kyujin</span>
-                    </div>
+                <div>
+                    <label for="comment" class="form-label">COMMENT</label>
+                    <textarea class="form-control" id="comment" name="comment" rows="3" style="width:400px;"></textarea>
                 </div>
-            </a>
-            <a class="link_txt">
-                전환
-            </a>
-        </div>
-
-        <div class="recommend_box">
-            <span style="color: gray"> 회원님을 위한 추천</span>
-            <span style="font-size: 12px"> 모두 보기 </span>
-        </div>
-        {% for ul in user_list %}
-            <div>
-                <div class="feed_name" style="justify-content: space-between">
-                    <div class="profile_box">
-                        <img class="profile_img"
-                             src="https://i.pinimg.com/736x/93/a6/8b/93a68b57a54e4bdc73d43d1d049b94b3.jpg">
-                    </div>
-                    <div class="name_content">
-                        <span class="feed_name_txt"> {{ ul.username }} </span>
-                        <span class="name_content_txt"> Iinstargram 신규가입</span>
-                    </div>
-                    {% if ul in user.follow.all %}
-                        <a class="link_txt" href="/user/follow/{{ ul.id }}">
-                            팔로우취소
-                        </a>
-                    {% else %}
-                        <a class="link_txt" href="/user/follow/{{ ul.id }}">
-                            팔로우
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        {% endfor %}
-
-        <div class="comment_box">
-            <span class="logo-font"> 🍳Sunny Side Up  </span>
-            <span> Created <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise </a> </span>
+                <br>
+                <button type="submit" class="btn btn-outline-dark" class="post_btn">게시</button>
+            </form>
         </div>
     </div>
-
-</div>
-
-</body>
-
-</html>
+{% endblock body %}
+       
