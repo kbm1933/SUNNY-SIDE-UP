@@ -11,9 +11,9 @@
                 <span class="feed_name_txt"> {{ user }} </span>
         </div>
 
-        <div class="mb-3" style="margin-top: 20px; margin-bottom: 20px;>
-            <label for=" exampleFormControlTextarea1
-        " class="form-label" style="font-weight: normal"> {{ user }}님, 무슨 생각을 하고 계신가요? </label>
+        <div class="mb-3" style="margin-top: 20px; margin-bottom: 20px;">
+            <label for="my-content" class="form-label" style="font-weight: normal"> 
+                {{ user }}님, 무슨 생각을 하고 계신가요? </label>
         <textarea class="form-control" id="my-content" name="my-content" rows="3" style="margin-top: 20px;"> </textarea>
     </div>
 
@@ -27,7 +27,7 @@
 
     </div>
 
-    {% for con in content %}
+    {% for con in posts %}
         <div class="border feed_box" style="padding: 10px;">
             <div class="feed_name">
                 <div class="profile_box">
@@ -41,6 +41,7 @@
                     <img class="feed_img" src='{{ photo.image.url }}'><br>
 
                 {% endfor %}
+            </a>
                 <div class="feed_icon">
                     <div>
                         {% comment %} 좋아요 눌려있으면 {% endcomment %}
@@ -69,6 +70,18 @@
                 </div>
         </div>
     {% endfor %}
-    </a>
+ <div class="page_num">
+    {% if posts.has_previous %}
+ 
+    <a href="?page={{posts.previous_page_number}}">back</a>
+    {% endif %}
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{ posts.paginator.num_pages}}</span>
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number}}">next</a>
+  
+    {% endif %}
+ </div>
 {% endblock body %}
    
