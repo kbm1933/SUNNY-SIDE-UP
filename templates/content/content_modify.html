@@ -1,40 +1,30 @@
 {% extends 'base.html' %}
 {#modify#}
-{% block title %}
-    게시글 자세히보기
-{% endblock %}
+{#{% block title %}#}
+{#    게시글 수정#}
+{#{% endblock %}#}
 
-{% block content %}
-    <div class="container timeline-container">
-        <div class="row mb-2">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            <div class="media-body">
-                                <p>
-                                <form action="/content/{{ content.id }}" method="post">
-
-                                    {% csrf_token %}
-                                    {% if error %}
-                                        <div class="alert alert-danger" role="alert">
-                                            {{ error }}
-                                        </div>
-                                    {% endif %}
-
-                                    <div class="form-group mb-2">
-                                        <textarea class="form-control" style="resize: none" name='modify-content'
-                                                  id="modify-content">{{ content.contents }}</textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary" style="float:right;">작성하기</button>
-
-                                </form>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{% block body %}
+         <div class="border feed_box">
+        <div class="feed_name">
+            <div class="profile_box">
+                <img class="profile_img"
+                     src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
             </div>
+            <form action="/content/modify/{{ content.id }}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <span class="feed_name_txt"> {{ user }} </span>
+
+                <label for="imgs" class="form-label">PHOTO</label><br>
+                <input class='photo_btn' type="file" id='imgs' name='imgs' multiple>
+                <div class="mb-3">
+                    <label for="my-content" class="form-label">CONTENT</label>
+                    <textarea class="form-control" id="my-content" name="my-content" rows="3">{{ content.contents }}</textarea>
+                </div>
+
+                <hr>
+                <button type="submit" class="post_btn">수정</button>
+            </form>
         </div>
     </div>
-{% endblock %}
+{% endblock body %}
