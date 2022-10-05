@@ -29,7 +29,7 @@
 
 </div>
 
-{% for con in content %}
+{% for con in posts %}
 <div class="border feed_box" style="padding: 10px;">
     <div class="feed_name">
         <div class="profile_box">
@@ -71,4 +71,19 @@
 </div>
 {% endfor %}
 </a>
+<div class="page_num">
+    {% if posts.has_previous %}
+
+    <a href="?page={{posts.previous_page_number}}">back</a>
+    {% endif %}
+    <div class = 'paginator'>
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{ posts.paginator.num_pages}}</span>
+    </div>
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number}}">next</a>
+
+    {% endif %}
+ </div>
 {% endblock body %}
