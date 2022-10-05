@@ -11,10 +11,9 @@
         </div>
         <span class="feed_name_txt"> {{ con.author }} </span>
     </div>
-    {% for photo in con.photo_set.all %}
-    <img class="feed_img" src='{{ photo.image.url }}'><br>
 
-    {% endfor %}
+    <img class="feed_img" src='{{ con.image.url }}'><br>
+
 
     <div class="feed_icon">
         <div>

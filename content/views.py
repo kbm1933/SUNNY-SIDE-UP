@@ -1,4 +1,4 @@
-from content.models import ContentModel, ContentComment, UserModel,Photo
+from content.models import ContentModel, ContentComment, UserModel
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -44,20 +44,14 @@ def content(request):
     elif request.method == 'POST':
         user = request.user
         contents = request.POST.get('my-content','')
+        img = request.FILES['imgs']
 
         if contents == '':
             all_content = ContentModel.objects.all().order_by('-created_at')
             return render(request,'content/home.html',{'error':'글은 공백일 수 없습니다.','content':all_content})
         else:
-            my_content = ContentModel.objects.create(author=user,contents=contents)
+            my_content = ContentModel.objects.create(author=user,contents=contents,image = img)
             my_content.save()
-
-            # 이미지 추가
-            for img in request.FILES.getlist('imgs'):
-                photo = Photo()
-                photo.post = my_content
-                photo.image = img
-                photo.save()
 
             return redirect('/content')
 
@@ -107,7 +101,9 @@ def modify_content(request,id):
     my_content = ContentModel.objects.get(id=id)
     if request.method == 'POST':
         my_content.contents = request.POST['my-content']
+        my_content.image = request.FILES['imgs']
         my_content.save()
+
         return redirect('/content')
 
     return render(request, 'content/content_modify.html', {'content': my_content})
