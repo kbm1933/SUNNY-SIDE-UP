@@ -1,48 +1,48 @@
+{% extends 'base.html' %}
+{% block body %}
 
-        {% extends 'base.html' %}
-        {% block body %}
-
-        {% for con in content  %}
-        {% if con in user.likes.all %}
-        <div class="border feed_box">
-            <a href="/content/{{con.id}}">
-            <div class="feed_name">
-                <div class="profile_box">
-                    <img class="profile_img"
-                         src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
-                </div>
-                <span class="feed_name_txt"> {{ con.author }} </span>
-            </div>
-            <img class="feed_img"
-                 src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80">
-
-            <div class="feed_icon">
-                <div> 
-                    {% comment %} 좋아요 눌려있으면 {% endcomment %}
-                    {% if con in user.likes.all %}
-                    <a href="/content/{{ con.id }}/likes"><span >❤</span></a>
-                    {% else %}
-                    {% comment %} 안눌려있으면 {% endcomment %}
-                    <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined">favorite</span></a>
-                    {% endif %}
-                    <span class="material-icons-outlined"> comment </span>
-                </div>
-
-                <div>
-                    <span class="material-icons-outlined">
-                        turned_in_not
-                    </span>
-                </div>
-            </div>
-            <div class="feed_like">
-                <p class="feed_txt"><b>좋아요 {{ con.liked.count }} 개</b></p>
-            </div>
-            <div class="feed_content">
-                <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
-            </div>
+{% for con in content %}
+{% if con in user.likes.all %}
+<div class="border feed_box" style="padding: 10px;">
+    <div class="feed_name">
+        <div class="profile_box">
+            <img class="profile_img"
+                src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
         </div>
-        {% endif %}
-        {% endfor %}       
-    </a>
-    {% endblock body %}
-   
+        <span class="feed_name_txt"> {{ con.author }} </span>
+    </div>
+    {% for photo in con.photo_set.all %}
+    <img class="feed_img" src='{{ photo.image.url }}'><br>
+
+    {% endfor %}
+
+    <div class="feed_icon">
+        <div>
+            {% comment %} 좋아요 눌려있으면 {% endcomment %}
+            {% if con in user.likes.all %}
+            <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined"
+                    style="color: red;">favorite</span></a>
+            {% else %}
+            {% comment %} 안눌려있으면 {% endcomment %}
+            <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined">favorite</span></a>
+            {% endif %}
+            <a href="/content/{{ con.id }}"><span class="material-icons-outlined"> comment </span></a>
+        </div>
+
+        <div>
+            <span class="material-icons-outlined">
+                turned_in_not
+            </span>
+        </div>
+    </div>
+    <div class="feed_like">
+        <p class="feed_txt"><b>좋아요 {{ con.liked.count }} 개</b></p>
+    </div>
+    <div class="feed_content">
+        <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+</a>
+{% endblock body %}
