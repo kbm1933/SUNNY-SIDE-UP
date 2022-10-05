@@ -8,7 +8,7 @@
                          src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
                 </div>
                 <span class="feed_name_txt"> {{ content.author }} </span>
-                <span class="feed_name_txt" style="margin-left : 130px;">{{ content.created_at|timesince }} 전 </span>
+                <span class="feed_name_txt" style="font-weight: normal">{{ content.created_at|timesince }} 전 </span>
                 {% if user == content.author %}
                 <a href="/content/delete/{{ content.id }}">
                     <span class="material-symbols-outlined"> delete </span>
@@ -24,7 +24,7 @@
                 <div> 
                     {% comment %} 좋아요 눌려있으면 {% endcomment %}
                     {% if content in user.likes.all %}
-                    <a href="/content/{{ content.id }}/likes-detail"><span >❤</span></a>
+                    <a href="/content/{{ content.id }}/likes-detail"<span class="material-symbols-outlined" style="color:red;">favorite</span></a>
                     {% else %}
                     {% comment %} 안눌려있으면 {% endcomment %}
                     <a href="/content/{{ content.id }}/likes-detail"><span class="material-symbols-outlined">favorite</span></a>
