@@ -78,8 +78,8 @@
             <form action="/content/comment/{{ content.id }}" method="post">
                 {% csrf_token %}
                 <span class="feed_name_txt"> {{ user }} </span>
-
-                <div>
+            </div>
+                <div class="mb-3"> 
                     <label for="comment" class="form-label">COMMENT</label>
                     <textarea class="form-control" id="comment" name="comment" rows="3" style="width:400px;"></textarea>
                 </div>
