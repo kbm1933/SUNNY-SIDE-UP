@@ -1,68 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div class="border feed_box" style="padding: 20px;">
+        <div class="feed_name">
+            <div class="profile_box">
+                <img class="profile_img"
+                     src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
+            </div>
+            <form action="/content/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <span class="feed_name_txt"> {{ user }} </span>
+        </div>
+        <label for="imgs" class="form-label" style="margin-top: 20px;"> <span class="material-symbols-outlined">add_photo_alternate</span>
+            사진 또는 동영상을 선택하세요 </label><br>
+        <input class='photo_btn' type="file" id='imgs' name='imgs' multiple">
+        <div class="mb-3" style="margin-top: 20px;">
+            <label for="my-content" class="form-label"> <span class="material-symbols-outlined"> edit_note </span> {{ user }}님, 무슨 생각을 하고 계신가요?</label>
+            <textarea class="form-control" id="my-content" name="my-content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-dark" class="post_btn"">게시</button>
+        </form>
+    </div>
 
-        {% extends 'base.html' %}
-        {% block body %}
+    {% for con in content %}
         <div class="border feed_box">
             <div class="feed_name">
                 <div class="profile_box">
                     <img class="profile_img"
                          src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
                 </div>
-                <form action="/content/" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                <span class="feed_name_txt"> {{ user }} </span>
-            </div>
-            <label for="imgs" class="form-label">PHOTO</label><br>
-            <input class = 'photo_btn' type="file" id ='imgs' name='imgs' multiple>
-            <div class="mb-3">
-            <label for="my-content" class="form-label">CONTENT</label>
-            <textarea class="form-control" id="my-content" name="my-content" rows="3"></textarea>
-            </div>
-
-            <hr>
-            <button type="submit" class="post_btn">게시</button>
-        </form>
-        </div>
-
-        {% for con in content  %}
-        <div class="border feed_box">
-            <div class="feed_name">
-                <div class="profile_box">
-                    <img class="profile_img"
-                    src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
-                </div>
                 <span class="feed_name_txt"> {{ con.author }} </span>
             </div>
-            <a href="/content/{{con.id}}">
-                {% for photo in con.photo_set.all  %}
-            <img class="feed_img" src = '{{ photo.image.url }}'><br>
+            <a href="/content/{{ con.id }}">
+                {% for photo in con.photo_set.all %}
+                    <img class="feed_img" src='{{ photo.image.url }}'><br>
 
-                 {% endfor %}
-                 <div class="feed_icon">
-                <div> 
-                    {% comment %} 좋아요 눌려있으면 {% endcomment %}
-                    {% if con in user.likes.all %}
-                    <a href="/content/{{ con.id }}/likes"><span >❤</span></a>
-                    {% else %}
-                    {% comment %} 안눌려있으면 {% endcomment %}
-                    <a href="/content/{{ con.id }}/likes"><span class="material-symbols-outlined">favorite</span></a>
-                    {% endif %}
-                    <span class="material-icons-outlined"> comment </span>
-                </div>
+                {% endfor %}
+                <div class="feed_icon">
+                    <div>
+                        {% comment %} 좋아요 눌려있으면 {% endcomment %}
+                        {% if con in user.likes.all %}
+                            <a href="/content/{{ con.id }}/likes"><span>❤</span></a>
+                        {% else %}
+                            {% comment %} 안눌려있으면 {% endcomment %}
+                            <a href="/content/{{ con.id }}/likes"><span
+                                    class="material-symbols-outlined">favorite</span></a>
+                        {% endif %}
+                        <span class="material-icons-outlined"> comment </span>
+                    </div>
 
-                <div>
+                    <div>
                     <span class="material-icons-outlined">
                         turned_in_not
                     </span>
+                    </div>
                 </div>
-            </div>
-            <div class="feed_like">
-                <p class="feed_txt"><b>좋아요 {{ con.liked.count }} 개</b></p>
-            </div>
-            <div class="feed_content">
-                <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
-            </div>
+                <div class="feed_like">
+                    <p class="feed_txt"><b>좋아요 {{ con.liked.count }} 개</b></p>
+                </div>
+                <div class="feed_content">
+                    <p class="feed_txt"><b> {{ con.author }} </b> {{ con.contents }} </p>
+                </div>
         </div>
-        {% endfor %}       
+    {% endfor %}
     </a>
-    {% endblock body %}
+{% endblock body %}
    
