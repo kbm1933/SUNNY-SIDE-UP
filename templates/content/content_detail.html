@@ -10,12 +10,15 @@
             <span class="feed_name_txt"> {{ content.author }} </span>
             <span class="feed_name_txt" style="font-weight: normal">{{ content.created_at|timesince }} 전 </span>
             {% if user == content.author %}
+                <a href="/content/modify/{{ content.id }}">
+                    <span class="material-symbols-outlined"> edit_note </span>
+                </a>
                 <a href="/content/delete/{{ content.id }}">
                     <span class="material-symbols-outlined"> delete </span>
                 </a>
             {% endif %}
         </div>
-            <img class="feed_img" src='{{ content.image.url }}'><br>
+        <img class="feed_img" src='{{ content.image.url }}'><br>
 
         <div class="feed_icon">
             <div>
@@ -42,16 +45,6 @@
         </div>
         <div class="feed_content">
             <p class="feed_txt"><b> {{ content.author }} </b> {{ content.contents }} </p>
-        </div>
-        <div class="modify_content" style="float: right">
-            <a href="/content/modify/{{ content.id }}">
-                <span class="badge bg-success">수정</span>
-            </a>
-        </div>
-        <div style="text-align: right">
-            <a href="/content/delete/{{ content.id }}">
-                <span class="badge rounded-pill bg-danger">삭제</span>
-            </a>
         </div>
         {% for cm in comment %}
             <div class="feed_reply">
