@@ -3,6 +3,7 @@ from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 # Create your views here.
 def home(request):
@@ -28,7 +29,15 @@ def content(request):
         if user:#로그인이 되어 있다면
             user_list = UserModel.objects.all().exclude(username = request.user.username)
             all_content = ContentModel.objects.all().order_by('-created_at')
-            return render(request,'content/home.html',{'content':all_content, 'user_list':user_list})
+            paginator = Paginator(all_content, 10)
+            page = request.GET.get('page')
+            posts = paginator.get_page(page)
+            context = {
+                'content':all_content,
+                'user_list':user_list,
+                'posts' : posts
+                 }
+            return render(request,'content/home.html',context)
         else:#로그인이 안되어 있다면
             return redirect('/sign-in')
 
