@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import UserModel
+from content.models import ContentModel
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -75,9 +76,13 @@ def user_follow(request, id):
     return redirect('/')
 
 @login_required
-def my_view(request):
+def my_view(request,id):
+    
     user_list = UserModel.objects.all().exclude(username = request.user.username)
+    all_content = ContentModel.objects.filter(author = id).order_by('-created_at')
+
     context = {
-            'user_list':user_list
+            'user_list':user_list,
+            'content':all_content
         }
     return render(request,'user/profile.html',  context)
