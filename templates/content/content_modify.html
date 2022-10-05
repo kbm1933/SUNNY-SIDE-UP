@@ -4,37 +4,33 @@
     게시글 자세히보기
 {% endblock %}
 
-{% block content %}
-    <div class="container timeline-container">
-        <div class="row mb-2">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            <div class="media-body">
-                                <p>
-                                <form action="/content/{{ content.id }}" method="post">
-
-                                    {% csrf_token %}
-                                    {% if error %}
-                                        <div class="alert alert-danger" role="alert">
-                                            {{ error }}
-                                        </div>
-                                    {% endif %}
-
-                                    <div class="form-group mb-2">
-                                        <textarea class="form-control" style="resize: none" name='modify-content'
-                                                  id="modify-content">{{ content.contents }}</textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary" style="float:right;">작성하기</button>
-
-                                </form>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{% block body %}
+    <div class="border feed_box" style="padding: 20px;">
+        <div class="feed_name">
+            <div class="profile_box">
+                <img class="profile_img"
+                     src="https://lumiere-a.akamaihd.net/v1/images/c94eed56a5e84479a2939c9172434567c0147d4f.jpeg?region=0,0,600,600&width=480">
             </div>
+            <form action="/content/modify/{{ content.id }}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <span class="feed_name_txt"> {{ user }} </span>
+
+
+                <div class="mb-3" style="margin-top: 20px; margin-bottom: 20px;">
+                    <label for="my-content" class="form-label" style="font-weight: normal">
+                        {{ user }}님, 무슨 생각을 하고 계신가요? </label>
+                    <textarea class="form-control" id="my-content" name="my-content" rows="3"
+                              style="margin-top: 20px;">{{ content.contents }} </textarea>
+                </div>
+
+
+                <label for="imgs" class="form-label" style="font-weight: bold; margin-top: 20px; margin-bottom: 10px;">
+                    🤳사진 또는 동영상을 선택하세요 </label>
+                <input class='photo_btn' type="file" id='imgs' name='imgs' multiple Required>
+                <div style="text-align: center; margin-top: 40px;">
+                    <button type="submit" class="btn btn-outline-dark" class="post_btn">수정</button>
+                </div>
+            </form>
         </div>
     </div>
-{% endblock %}
+{% endblock body %}

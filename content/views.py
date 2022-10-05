@@ -1,4 +1,4 @@
-from content.models import ContentModel, ContentComment, UserModel, Photo, ContentModify
+from content.models import ContentModel, ContentComment, UserModel,Photo
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -104,24 +104,13 @@ def delete_comment(request,id):
 
 @login_required
 def modify_content(request,id):
-    # my_content = ContentModel.objects.get(id=id)
-    # # content_modify = ContentModel.objects.filter(contents=id).order_by('-created_at')
-    # if request.method == 'POST':
-    #     contents = request.POST.get('contents')
-    #     if my_content is not None:
-    #         my_content.contents = contents
-    #         my_content.save()
-    #         return redirect('/content')
-    #
-    # return render(request, 'content/content_modify.html', {'content': my_content})#,'modify-content':content_modify})
     my_content = ContentModel.objects.get(id=id)
-    content_modify = ContentModel.objects.filter(contents=id).order_by('-created_at')
     if request.method == 'POST':
-        contents = request.POST.get('contents')
-        my_content.contents = contents
+        my_content.contents = request.POST['my-content']
         my_content.save()
+        return redirect('/content')
 
-    return render(request, 'content/content_modify.html', {'content': my_content, 'modify-content': content_modify})
+    return render(request, 'content/content_modify.html', {'content': my_content})
 
 
 
