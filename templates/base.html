@@ -234,7 +234,7 @@
   
 
    <a class="headlight" href="/">🍳Sunny-Side-Up</a>
-    <input style = "width : 200px " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <input style = "width: 200px; height: 30px; " class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
     <div>           
         <a href="/logout">LOGOUT</a> 
         <a href="/"><span class="material-symbols-outlined"> home</span></a>
@@ -261,7 +261,7 @@
                 </div>
                 <div class="name_content">
                     <span class="feed_name_txt"> {{ user }} </span>
-                    <span class="name_content_txt"> Moon Kyujin</span>
+                    <span class="name_content_txt"> {{ user }} </span>
                 </div>
             </div>
         </a>
@@ -283,7 +283,7 @@
               </div>
               <div class="name_content">
                 <span class="feed_name_txt"> {{ ul.username }} </span>
-                <span class="name_content_txt"> Iinstargram 신규가입</span>
+                <span class="name_content_txt"> Sunny-Side-Up 신규가입</span>
               </div>
               {% if ul in user.follow.all %}
               <a class="link_txt" href="/user/follow/{{ul.id}}">
@@ -300,7 +300,7 @@
 
         <div class="comment_box">
             <span class="logo-font"> 🍳Sunny Side Up  </span>
-            <span> Created <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise <a> </span>
+            <span> Created by <a href="https://github.com/kimmyeongji/SUNNY-SIDE-UP"> B4 Sunrise <a> </span>
         </div>
     </div>
 
