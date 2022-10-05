@@ -20,6 +20,10 @@
 
         <title>🍳Sunny-Side-Up Sign-Up</title>
         <style>
+            body{
+                background-color: #FAFAFA;
+            }
+            
             .headlight {
                 font-size: 30px;
                 font-family: 'Lobster', cursive;
@@ -125,10 +129,8 @@
             <div class="content_field">
                 <div class="feed_box">
                     {% for con in content %}
-                    {% for photo in con.photo_set.all %}
-                    <img class="feed_img" src='{{ photo.image.url }}'><br>
-                    {% endfor %}
-                    {% endfor %}
+                    <img class="feed_img" src='{{ con.image.url }}'><br>
+                    {% endfor %}      
                 </div>
             </div>
 
