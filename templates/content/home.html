@@ -27,7 +27,7 @@
 
     </div>
 
-    {% for con in content %}
+    {% for con in posts %}
         <div class="border feed_box" style="padding: 10px;">
             <div class="feed_name">
                 <div class="profile_box">
@@ -41,6 +41,7 @@
                     <img class="feed_img" src='{{ photo.image.url }}'><br>
 
                 {% endfor %}
+            </a>
                 <div class="feed_icon">
                     <div>
                         {% comment %} 좋아요 눌려있으면 {% endcomment %}
@@ -69,6 +70,18 @@
                 </div>
         </div>
     {% endfor %}
-    </a>
+ <div class="page_num">
+    {% if posts.has_previous %}
+ 
+    <a href="?page={{posts.previous_page_number}}">back</a>
+    {% endif %}
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{ posts.paginator.num_pages}}</span>
+    {% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number}}">next</a>
+  
+    {% endif %}
+ </div>
 {% endblock body %}
    
