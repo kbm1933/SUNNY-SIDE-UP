@@ -14,7 +14,7 @@
             <form action="/content/modify/{{ content.id }}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <span class="feed_name_txt"> {{ user }} </span>
-
+            </div>
 
                 <div class="mb-3" style="margin-top: 20px; margin-bottom: 20px;">
                     <label for="my-content" class="form-label" style="font-weight: normal">
@@ -31,6 +31,6 @@
                     <button type="submit" class="btn btn-outline-dark" class="post_btn">수정</button>
                 </div>
             </form>
-        </div>
+
     </div>
 {% endblock body %}
